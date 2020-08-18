@@ -10,4 +10,6 @@ Los datos seteados previamente serán:
 
 2_ La cantidad de productos actual en la cinta(sens_2) 
 
+![alt text](https://raw.githubusercontent.com/LeonardoAgustinSanchez/TP-Info2-Maquinas-De-Estado/master/cinta%202407.png)
+
 El ciclo arranca con la cinta sin productos. Cuando comienza, los productos empiezan a ingresar al circuito, cuando por el sensor pasa  la cantidad de productos se detiene momentáneamente para embalarlas y sacarlas del circuito, volviendo asi al inicio.
