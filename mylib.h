@@ -1,60 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MY_LIB
+#ifndef MI_LIBRERIA
+#define MI_LIBRERIA
+ 
+typedef enum {espera=0,carga=1}estados_t;
 
-char *getKey(char *key){
-char i = 0;
-
-while(*(key+i) != ' ')
+typedef struct 
 	{
-		i++;
-	}
-*(key+i) = 0;
+ 	 	char Cant_Emb;         // cantidad actual
+ 		char Sens;     // cantidad seteada 
+	}cantidad_t;
 
-return key+i+1;
-}
+//cantidad_t f_inicio(void); // lee el archivo de configuración y carga las variables.
+//estados_t f_espera(cantidad_t);
+//estados_t f_carga(cantidad_t);
 
-int second(){
-FILE *conf;
-char cadena[40], *key, *val;
-char variables[3][20] = {"cantEmb", "cantInicial"},i;
-char cantEmb, cantInicial;
+int f8=54;
 
-if( (conf = fopen("config.conf","rb")) == NULL ){
-	printf("No se encontro archivo de configuracion.\n"); //SI NO EXITE ARCHIVO DE CONFIG
-	return 1;
-}
-
-fgets(cadena, 40, conf);
-
-do{
-	key = cadena;
-	if( (*key) != '#' && strlen(key) >= 0){		//caracter que indica comentario
-		val = getKey(key); 						//modifica a key para que solo tenga la clave, retorna.
-		//printf("%s: %s\n", key, val);			//imprime la clave y el valor levantdo del archvio
-		
-		for( i = 0; i < 2; i++){
-			if( !strcmp( key , variables[i] ) ){
-				
-				switch(i){
-					case 0: cantEmb = atoi(val); //transformó una cadena de caract en un N°entero
-						break;
-					case 1:	cantInicial = atoi(val);
-						break;
-				}
-			}
-		}
-	}
-	
-	fgets(cadena, 40, conf);	
-}while( !feof(conf) );
-
-printf("PRECONFIGURACIONES:");
-printf("\n# Cant Necesaria Para Embalar: %d  ",cantEmb);
-printf("\n# Cant Inicial En Cinta: %d ",cantInicial);
-
-return cantEmb,cantInicial;
-
-}
+#endif
 
