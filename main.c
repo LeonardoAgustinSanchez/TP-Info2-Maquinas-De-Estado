@@ -2,7 +2,15 @@
 
 int main()
 {
-    printf("UNA VACA VESTIDA DE UNIFORME o (U.V-|V.du) %d", f8);
-	return 0;
+	cantidad_t configuracion;
+	configuracion = f_inicio();
+	
+	estados_t estado;
+	estado = espera;
+    
+	estados_t (*contador[])(cantidad_t*) = {f_espera,f_carga};
+	while(1) estado = (*contador[estado])(&configuracion);
+	
+	return 0; 
 }
 

@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "mylib.h"
 
 char *getKey(char *key)
@@ -15,53 +12,62 @@ while(*(key+i) != ' ')
 return key+i+1;
 }
 
-int second()
+cantidad_t f_seteo(char* "config.conf")
 {
 
 FILE *conf;
 char cadena[40], *key, *val;
 char variables[3][20] = {"cantEmb", "sens"},i;
-char cantEmb, sens;
 
-if( (conf = fopen("config.conf","rb")) == NULL ) //SI NO EXITE ARCHIVO DE CONFIG
+cantidad_t configuracion;
+configuracion.Cant_Emb = 0;
+configuracion.sens = 0;
+
+if( (conf = fopen("config.conf","rb")) == NULL ) 
 {
 	printf("No se encontro archivo de configuracion.\n"); 
-	return 1;
+	return 1; 
 }
-
-fgets(cadena, 40, conf);
-
-do
+else
 {
+fgets(cadena, 40, conf);
+	do
+	{
 	key = cadena;
 	if( (*key) != '#' && strlen(key) >= 0)
-	{		//caracter que indica comentario
-		val = getKey(key); 						//modifica a key para que solo tenga la clave, retorna.
-		//printf("%s: %s\n", key, val);			//imprime la clave y el valor levantdo del archvio
-		
-		for( i = 0; i < 2; i++)
-		{
-			if( !strcmp( key , variables[i] ) )
+		{		
+		val = getKey(key); 			//modifica a key para que solo tenga la clave, retorna.
+//printf("%s: %s\n", key, val);		//imprime la clave y el valor levantdo del archvio
+			for( i = 0; i < 2; i++)
 			{
-				
-				switch(i)
+				if( !strcmp( key , variables[i] ) )
 				{
-					case 0: cantEmb = atoi(val); //transformó una cadena de caract en un N°entero
+				
+					switch(i)
+					{
+					case 0: cantidad.CantEmb = atoi(val); //transformó una cadena de caract en un N°entero
 						break;
-					case 1:	sens = atoi(val);
+					case 1:	cantidad.Sens = atoi(val);
 						break;
+					}
 				}
 			}
 		}
+	fgets(cadena, 40, conf);	
+
 	}
-fgets(cadena, 40, conf);	
-
+	while( !feof(conf) );
 }
-while( !feof(conf) );
-
-printf("# Cant Necesaria Para Embalar: %d  ",cantEmb);
-printf("\n# Cant Inicial En Cinta: %d ",sens);
-
-	//fclose (archivo);
-	//return configuracion;
+	printf("# Cant Necesaria Para Embalar: %d  ",cantidad.CantEmb);
+	printf("\n# Cant Inicial En Cinta: %d ",cantidad.Sens);
+	printf("\n-----\n")
+	if(cantidad.Sens < cantidad.CantEmb){
+		printf("Cuando Arranque la cinta se podran seguir pasando productos\n");
+	}
+	else{
+		printf("Cuando Arranque la cinta los productos se tendran que embalar\n");
+	}
+	
+	fclose (archivo);
+	return configuracion;
 }
