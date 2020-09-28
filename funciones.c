@@ -19,7 +19,7 @@ void pre(cantidad_t* cantidad,int* dato)
 }
 estados_t f_carga(cantidad_t* cantidad)
 {
-	if(cantidad->Sens < cantidad->CantEmb){
+	if(cantidad->Sens < cantidad->Cant_Emb){
 	pros1();
 	return carga;
 	}
@@ -28,7 +28,7 @@ estados_t f_carga(cantidad_t* cantidad)
 
 estados_t f_espera(cantidad_t* cantidad)
 {
-	if(cantidad->Sens == cantidad->CantEmb){
+	if(cantidad->Sens == cantidad->Cant_Emb){
 	pros3();
 	return espera;
 	}

@@ -17,7 +17,7 @@ cantidad_t f_seteo(char* "config.conf")
 
 FILE *conf;
 char cadena[40], *key, *val;
-char variables[3][20] = {"cantEmb", "sens"},i;
+char variables[3][20] = {"Cant_Emb", "sens"},i;
 
 cantidad_t configuracion;
 configuracion.Cant_Emb = 0;
@@ -45,7 +45,7 @@ fgets(cadena, 40, conf);
 				
 					switch(i)
 					{
-					case 0: cantidad.CantEmb = atoi(val); //transformó una cadena de caract en un N°entero
+					case 0: cantidad.Cant_Emb = atoi(val); //transformó una cadena de caract en un N°entero
 						break;
 					case 1:	cantidad.Sens = atoi(val);
 						break;
@@ -58,10 +58,10 @@ fgets(cadena, 40, conf);
 	}
 	while( !feof(conf) );
 }
-	printf("# Cant Necesaria Para Embalar: %d  ",cantidad.CantEmb);
+	printf("# Cant Necesaria Para Embalar: %d  ",cantidad.Cant_Emb);
 	printf("\n# Cant Inicial En Cinta: %d ",cantidad.Sens);
 	printf("\n-----\n")
-	if(cantidad.Sens < cantidad.CantEmb){
+	if(cantidad.Sens < cantidad.Cant_Emb){
 		printf("Cuando Arranque la cinta se podran seguir pasando productos\n");
 	}
 	else{
