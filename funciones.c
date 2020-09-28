@@ -13,23 +13,22 @@ int ingresoDatos(void){
 	scanf("%d",&ingreso);
 	return ingreso;
 }
-
-cantidad_t prefuncion(cantidad_t *cantidad,int cantidades)
-
-
-
-estados_t f_carga(cantidad_t *cantidad,int dato)
+void pre(cantidad_t* cantidad,int* dato)
 {
-	if(dato < cantidad->CantEmb){
+	cantidad->Sens=*dato; 
+}
+estados_t f_carga(cantidad_t* cantidad)
+{
+	if(cantidad->Sens < cantidad->CantEmb){
 	pros1();
 	return carga;
 	}
 	pros3();
 	return espera;}
 
-estados_t f_espera(cantidad_t *cantidad)
+estados_t f_espera(cantidad_t* cantidad)
 {
-	if(cantidad->sens == cantidad->CantEmb){
+	if(cantidad->Sens == cantidad->CantEmb){
 	pros3();
 	return espera;
 	}
@@ -38,6 +37,7 @@ estados_t f_espera(cantidad_t *cantidad)
 }
 
 cantidad_t inicio (void){
+	pre(cantidad,ingresoDatos);
 	cantidad_t configuracionInicial;
 	configuracionInicial = f_seteo ("config.conf");
 	return configuracionInicial;
